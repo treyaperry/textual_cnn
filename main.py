@@ -250,7 +250,7 @@ def main():
         generated_labels.append(generated)
 
         # Limit the number of training/validation samples, can be up to 500,000
-        if index == 25000: break
+        if index == 10000: break
 
 
     print(f"\nNumber of generated samples: {generated_count} for {count} samples")
@@ -295,7 +295,7 @@ def main():
 
     # ---- Training loop ----
     # Still haven't figured out the sweet spot here...
-    num_epochs = 5
+    num_epochs = 10
 
     for epoch in range(num_epochs):
 
@@ -362,7 +362,7 @@ def main():
     
     # An unprompted AI essay from ChatGPT OR human authored text around 2000-3000 characters
     # There are multiple test cases in data/ to swap in here
-    file_name = "test_specimen_moderate"
+    file_name = "test_specimen_easy"
     test_file = "data/textual_cnn/testing/" + str(file_name) + ".txt"
 
     print(f"Using file: '{file_name}':")
@@ -377,6 +377,86 @@ def main():
         print(f"An error occurred: {e}")
 
     print(f"\nWill begin the process of ID-ing given text as AI generated or not...")
+    percent_ai = predict_ai_percent(test_text)
+    print(f"Predicted AI probability of '{file_name}': {percent_ai:.2f}%")
+
+    file_name = "test_specimen_easy_2"
+    test_file = "data/textual_cnn/testing/" + str(file_name) + ".txt"
+
+    print(f"Using file: '{file_name}':")
+
+    try:
+        with open(test_file, "r", encoding="utf-8") as file:
+            test_text = file.read()
+        # print(test_text)
+    except FileNotFoundError:
+        print(f"Error: The file '{test_file}' was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    percent_ai = predict_ai_percent(test_text)
+    print(f"Predicted AI probability of '{file_name}': {percent_ai:.2f}%")
+
+    file_name = "test_specimen_easy_3"
+    test_file = "data/textual_cnn/testing/" + str(file_name) + ".txt"
+
+    print(f"Using file: '{file_name}':")
+
+    try:
+        with open(test_file, "r", encoding="utf-8") as file:
+            test_text = file.read()
+        # print(test_text)
+    except FileNotFoundError:
+        print(f"Error: The file '{test_file}' was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    percent_ai = predict_ai_percent(test_text)
+    print(f"Predicted AI probability of '{file_name}': {percent_ai:.2f}%")
+
+    file_name = "test_specimen_moderate"
+    test_file = "data/textual_cnn/testing/" + str(file_name) + ".txt"
+
+    print(f"Using file: '{file_name}':")
+
+    try:
+        with open(test_file, "r", encoding="utf-8") as file:
+            test_text = file.read()
+        # print(test_text)
+    except FileNotFoundError:
+        print(f"Error: The file '{test_file}' was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    percent_ai = predict_ai_percent(test_text)
+    print(f"Predicted AI probability of '{file_name}': {percent_ai:.2f}%")
+
+    file_name = "test_specimen_hard"
+    test_file = "data/textual_cnn/testing/" + str(file_name) + ".txt"
+
+    print(f"Using file: '{file_name}':")
+
+    try:
+        with open(test_file, "r", encoding="utf-8") as file:
+            test_text = file.read()
+        # print(test_text)
+    except FileNotFoundError:
+        print(f"Error: The file '{test_file}' was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    percent_ai = predict_ai_percent(test_text)
+    print(f"Predicted AI probability of '{file_name}': {percent_ai:.2f}%")
+
+    file_name = "test_specimen_human"
+    test_file = "data/textual_cnn/testing/" + str(file_name) + ".txt"
+
+    print(f"Using file: '{file_name}':")
+
+    try:
+        with open(test_file, "r", encoding="utf-8") as file:
+            test_text = file.read()
+        # print(test_text)
+    except FileNotFoundError:
+        print(f"Error: The file '{test_file}' was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
     percent_ai = predict_ai_percent(test_text)
     print(f"Predicted AI probability of '{file_name}': {percent_ai:.2f}%")
 
