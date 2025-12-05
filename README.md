@@ -19,8 +19,9 @@ In order to train the data, you will need to:
 - download the csv of the text used at this url - https://www.kaggle.com/datasets/shanegerami/ai-vs-human-text?resource=download
 - place the csv in the location ./data/textual_cnn/training/ 
 
-```
 Latest output w/ 10k sampes and 10 epochs:
+
+```
 RangeIndex: 487235 entries, 0 to 487234
 Data columns (total 2 columns):
      Column     Non-Null Count   Dtype  
