@@ -1,28 +1,29 @@
 # textual_cnn
 A convolutional neural network which converts text to an "image" to check for AI generation
 
-# Overview of Textual CNN
+## Overview of Textual CNN
 - A goal to detect whether a given piece of text is AI-generated or human-written by learning characteristic patterns in writing style, diction, and character-level composition
 - Transform text into a form suitable for computer vision models, enabling a convolutional neural network to interpret textual patterns as spatial “textures” to make a sort of image
 - Take a risk by claiming meaning and semantics of the text are unimportant - or even that the meaning is really just a higher level construct of this “image” of transformed text
 - Produce a single probability score indicating how likely the text is AI-generated, supporting classification, detection, and downstream decision-making
 
-# Details of Model
+## Details of Model
 1) Convert text into a 2D character grid: Each character becomes an integer ID, laid out row-by-row into a fixed-width grid (e.g., 128 chars per row), producing a matrix (H, W) where height varies with text length
 2) Batch with variable heights via dynamic padding: During batching, each grid is padded with extra rows so that all samples in a batch share the same height, yielding tensors shaped (B, H_max, W).
 3) Embed characters to create a multi-channel “image”: An embedding layer transforms each character ID into a vector, turning the grid into a tensor (B, C, H, W) suitable for convolution
 4) Use a CNN that pools only across width: Convolutional layers extract spatial/textural patterns across characters so max-pooling is applied only along the width to avoid collapsing height, allowing for for very short texts
 5) Global average pooling produces a single document representation: After the convolutional lifting, global average pooling reduces (B, C, H, W) to (B, C), which feeds into fully connected layers to output a single logit to sigmoid to AI-generated probability for the entire text
 
-# Training Data
+## Training Data
 In order to train the data, you will need to:
 - download the csv of the text used at this url - https://www.kaggle.com/datasets/shanegerami/ai-vs-human-text?resource=download
 - place the csv in the location ./data/textual_cnn/training/ 
 
+```
 Latest output w/ 10k sampes and 10 epochs:
 RangeIndex: 487235 entries, 0 to 487234
 Data columns (total 2 columns):
- #   Column     Non-Null Count   Dtype  
+     Column     Non-Null Count   Dtype  
 ---  ------     --------------   -----  
  0   text       487235 non-null  object 
  1   generated  487235 non-null  float64
@@ -56,3 +57,4 @@ Using file: 'test_specimen_hard':
 Predicted AI probability of 'test_specimen_hard': 0.80%
 Using file: 'test_specimen_human':
 Predicted AI probability of 'test_specimen_human': 0.00%
+```
