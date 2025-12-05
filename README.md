@@ -19,6 +19,14 @@ In order to train the data, you will need to:
 - download the csv of the text used at this url - https://www.kaggle.com/datasets/shanegerami/ai-vs-human-text?resource=download
 - place the csv in the location ./data/textual_cnn/training/ 
 
+## Testing
+For ease of testing and simplicity, the trained model is currently tested against unprompted ChatGPT essays around 3000 characters:
+- 3 “easy” to distinguish AI-generated essays
+- 2 “moderate” - 1 “easy-moderate” and 1 “moderate-hard”
+- 1 “very difficult”
+- 1 human written test (~3000 char excerpt from _Ulysses_)
+These are currently located in ./data/textual_cnn/testing/
+
 Latest output w/ 10k sampes and 10 epochs:
 
 ```
