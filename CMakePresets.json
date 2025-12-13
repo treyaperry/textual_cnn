@@ -1,0 +1,53 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 30,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "clang",
+            "displayName": "Clang configuration | clang compiler | ninja generator",
+            "description": "Clang compiler with ninja generator",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "BUILD_SHARED_LIBS": "OFF"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "clang-debug",
+            "displayName": "Build with Clang in Debug mode",
+            "configurePreset": "clang",
+            "configuration": "Debug"
+        },
+        {
+            "name": "clang-release",
+            "displayName": "Build with Clang in Release mode",
+            "configurePreset": "clang",
+            "configuration": "Release"
+        }
+    ],
+    "workflowPresets": [
+        {
+            "name": "clang-debug",
+            "displayName": "Build with Clang in Debug mode",
+            "steps": [
+                { "type": "configure", "name": "clang" },
+                { "type": "build", "name": "clang-debug" }
+            ]
+        },
+        {
+            "name": "clang-release",
+            "displayName": "Build with Clang in Release mode",
+            "steps": [
+                { "type": "configure", "name": "clang" },
+                { "type": "build", "name": "clang-release" }
+            ]
+        }
+    ]
+}
