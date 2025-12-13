@@ -1,14 +1,10 @@
-Checks: '
+Checks: >
   -*,
   bugprone-*,
   clang-analyzer-*,
-  modernize-*,
   performance-*,
   readability-*,
-  portability-*,
-  cert-*,
-  cppcoreguidelines-*
-'
+  portability-*
 
 # Use the .clang-format file to format.
 FormatStyle: 'file'
