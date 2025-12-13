@@ -16,6 +16,17 @@
                 "CMAKE_C_COMPILER": "clang",
                 "BUILD_SHARED_LIBS": "OFF"
             }
+        },
+        {
+            "name": "gcc",
+            "displayName": "GCC configuration | gcc compiler | ninja generator",
+            "description": "GCC compiler with ninja generator",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc",
+                "BUILD_SHARED_LIBS": "OFF"
+            }
         }
     ],
     "buildPresets": [
@@ -29,6 +40,18 @@
             "name": "clang-release",
             "displayName": "Build with Clang in Release mode",
             "configurePreset": "clang",
+            "configuration": "Release"
+        },
+                {
+            "name": "gcc-debug",
+            "displayName": "Build with GCC in Debug mode",
+            "configurePreset": "gcc",
+            "configuration": "Debug"
+        },
+        {
+            "name": "gcc-release",
+            "displayName": "Build with GCC in Release mode",
+            "configurePreset": "gcc",
             "configuration": "Release"
         }
     ],
@@ -47,6 +70,22 @@
             "steps": [
                 { "type": "configure", "name": "clang" },
                 { "type": "build", "name": "clang-release" }
+            ]
+        },
+                {
+            "name": "gcc-debug",
+            "displayName": "Build with GCC in Debug mode",
+            "steps": [
+                { "type": "configure", "name": "gcc" },
+                { "type": "build", "name": "gcc-debug" }
+            ]
+        },
+        {
+            "name": "gcc-release",
+            "displayName": "Build with GCC in Release mode",
+            "steps": [
+                { "type": "configure", "name": "gcc" },
+                { "type": "build", "name": "gcc-release" }
             ]
         }
     ]
