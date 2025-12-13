@@ -9,7 +9,7 @@ project(textual_cnn
 set(CMAKE_C_STANDARD 23)
 
 # Export compiler commands
-set(CMAKE_EXPORT_COMPILER_COMMANDS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Set output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
