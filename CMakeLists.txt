@@ -29,3 +29,4 @@ enable_testing() # Enable testing for CTest integration.
 
 # Add subdirectories
 add_subdirectory(src)
+add_subdirectory(test)
