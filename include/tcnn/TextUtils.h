@@ -30,7 +30,7 @@ enum TextConstants : image_id {
 /// @return true if the character is printable, false otherwise.
 ///
 inline bool TextUtils_is_printable_char(const uint8_t CODE) {
-  return (CODE >= TEXT_CONSTANTS_FIRST_PRINTABLE_CHAR &&
+  return (bool)(CODE >= TEXT_CONSTANTS_FIRST_PRINTABLE_CHAR &&
           CODE <= TEXT_CONSTANTS_LAST_PRINTABLE_CHAR);
 }
 
