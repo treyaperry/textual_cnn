@@ -52,7 +52,7 @@ inline image_id TextUtils_char_to_id(const char CHARACTER) {
   if (TextUtils_is_printable_char(CODE)) {
     return (image_id)((image_id)CODE + TEXT_CONSTANTS_PRINTABLE_RANGE_OFFSET);
   }
-  return TEXT_CONSTANTS_PAD_ID; // Padding character ID
+  return TEXT_CONSTANTS_PAD_ID;
 }
 
 ///
