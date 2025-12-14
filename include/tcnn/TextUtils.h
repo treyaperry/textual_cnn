@@ -2,8 +2,8 @@
 /// @par Text / character utilities
 ///
 
-#ifndef TCNN_UTILS_TEXT_H
-#define TCNN_UTILS_TEXT_H
+#ifndef TCNN_TEXT_UTILS_H
+#define TCNN_TEXT_UTILS_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -66,4 +66,4 @@ void TextUtils_to_grid_ids(TextGridParams params);
 } // extern "C"
 #endif // __cplusplus
 
-#endif // TCNN_UTILS_TEXT_H
+#endif // TCNN_TEXT_UTILS_H
