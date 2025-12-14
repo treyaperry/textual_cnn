@@ -5,8 +5,8 @@
 #ifndef TCNN_UTILS_TEXT_H
 #define TCNN_UTILS_TEXT_H
 
-#include <stddef.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 
 #ifdef __cplusplus
@@ -31,7 +31,7 @@ enum TextConstants : image_id {
 ///
 inline bool TextUtils_is_printable_char(const uint8_t CODE) {
   return (bool)(CODE >= TEXT_CONSTANTS_FIRST_PRINTABLE_CHAR &&
-          CODE <= TEXT_CONSTANTS_LAST_PRINTABLE_CHAR);
+                CODE <= TEXT_CONSTANTS_LAST_PRINTABLE_CHAR);
 }
 
 ///
@@ -56,7 +56,7 @@ inline image_id TextUtils_char_to_id(const char CHARACTER) {
 /// @param maxRows The maximum number of rows in the grid.
 ///
 /// @todo Implement this function - place holder for now.
-void TextUtils_to_grid_ids(const char* text, size_t width, size_t maxRows);
+void TextUtils_to_grid_ids(const char *text, size_t width, size_t maxRows);
 
 #ifdef __cplusplus
 } // extern "C"
