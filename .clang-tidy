@@ -1,0 +1,17 @@
+Checks: >
+  -*,
+  bugprone-*,
+  clang-analyzer-*,
+  performance-*,
+  readability-*,
+  portability-*
+
+# Use the .clang-format file to format.
+FormatStyle: 'file'
+
+CheckOptions:
+  # Enforce specific identifier naming conventions (highly customizable)
+  - key: readability-identifier-naming.ConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.ConstantPrefix
+    value: ''
