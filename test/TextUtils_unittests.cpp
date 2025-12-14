@@ -61,4 +61,16 @@ TEST_P(CharToIdTest, CharToId) {
   EXPECT_EQ(param.expectedId, ::TextUtils_char_to_id(param.character));
 }
 
+///
+/// @brief Placeholder test for TextUtils_to_grid_ids function.
+/// @todo Implement tests once the function is implemented.
+///
+TEST(TextUtilsToGridIdsTest, PlaceholderTest) {
+  const TextGridParams PARAMS{.text = "sample text", .width = 10, .maxRows = 2};
+
+  // Currently, the function is a placeholder and does not return any value.
+  // This test simply ensures that the function can be called without errors.
+  EXPECT_NO_FATAL_FAILURE(::TextUtils_to_grid_ids(PARAMS));
+}
+
 } // namespace
