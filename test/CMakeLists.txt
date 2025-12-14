@@ -13,3 +13,8 @@ target_link_libraries(tcnn_unittests PRIVATE
     gtest 
     gtest_main
 )
+
+# Register with CTest and enable shuffle + repeat
+add_test(NAME tcnn_unittests
+    COMMAND tcnn_unittests --gtest_shuffle --gtest_repeat=2
+)
