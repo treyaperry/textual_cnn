@@ -24,6 +24,12 @@ enum TextConstants : image_id {
   TEXT_CONSTANTS_PRINTABLE_RANGE_OFFSET = -31,
 };
 
+typedef struct {
+  const char *text;
+  size_t width;
+  size_t maxRows;
+} TextGridParams;
+
 ///
 /// @brief Checks if a character code is a printable ASCII character.
 /// @param CODE The character code to check.
@@ -51,12 +57,10 @@ inline image_id TextUtils_char_to_id(const char CHARACTER) {
 
 ///
 /// @brief Converts a string of text into a grid of character IDs.
-/// @param text The input text string.
-/// @param width The width of the grid (number of characters)
-/// @param maxRows The maximum number of rows in the grid.
+/// @param params Parameters for the text grid conversion.
 ///
 /// @todo Implement this function - place holder for now.
-void TextUtils_to_grid_ids(const char *text, size_t width, size_t maxRows);
+void TextUtils_to_grid_ids(TextGridParams params);
 
 #ifdef __cplusplus
 } // extern "C"
