@@ -64,7 +64,7 @@ inline image_id TextUtils_char_to_id(const char CHARACTER) {
 /// @return The number of character IDs written to the output array.
 ///
 size_t TextUtils_to_grid_ids(const TextGridParams *params, image_id *outIds,
-                           size_t outIdsCapacity);
+                             size_t outIdsCapacity);
 
 #ifdef __cplusplus
 } // extern "C"

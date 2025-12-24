@@ -95,7 +95,7 @@ TEST(TextUtilsToGridIdsDeathTest, NullText) {
 ///
 TEST(TextUtilsToGridIdsDeathTest, NullOutIds) {
   TextGridParams params{
-    .text = "Hello",
+      .text = "Hello",
   };
   EXPECT_DEATH(::TextUtils_to_grid_ids(&params, nullptr, 10), "");
 }
@@ -104,11 +104,7 @@ TEST(TextUtilsToGridIdsDeathTest, NullOutIds) {
 /// @brief Tests TextUtils_to_grid_ids crashes on zero width.
 ///
 TEST(TextUtilsGridIdsDeathTest, ZeroWidth) {
-  TextGridParams params{
-    .text = "Hello",
-    .width = 0,
-    .maxRows = 2
-  };
+  TextGridParams params{.text = "Hello", .width = 0, .maxRows = 2};
   image_id outIds[10];
   EXPECT_DEATH(::TextUtils_to_grid_ids(&params, outIds, 10), "");
 }
@@ -117,11 +113,7 @@ TEST(TextUtilsGridIdsDeathTest, ZeroWidth) {
 /// @brief Tests TextUtils_to_grid_ids crashes on zero maxRows.
 ///
 TEST(TextUtilsGridIdsDeathTest, ZeroMaxRows) {
-  TextGridParams params{
-    .text = "Hello",
-    .width = 5,
-    .maxRows = 0
-  };
+  TextGridParams params{.text = "Hello", .width = 5, .maxRows = 0};
   image_id outIds[10];
   EXPECT_DEATH(::TextUtils_to_grid_ids(&params, outIds, 10), "");
 }

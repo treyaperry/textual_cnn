@@ -21,7 +21,7 @@ TEST(ErrorHandlingTest, Assert) {
 /// failure.
 ///
 TEST(ErrorHandlingTest, AssertOrReturn) {
-  
+
   EXPECT_DEATH({ TCNN_ASSERT_OR_RETURN(false, "Assertion failure!"); }, "");
 }
 
