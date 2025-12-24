@@ -67,10 +67,37 @@ TEST_P(CharToIdTest, CharToId) {
 ///
 TEST(TextUtilsToGridIdsTest, PlaceholderTest) {
   const TextGridParams PARAMS{.text = "sample text", .width = 10, .maxRows = 2};
+  image_id outIds[2];
 
-  // Currently, the function is a placeholder and does not return any value.
-  // This test simply ensures that the function can be called without errors.
-  EXPECT_NO_FATAL_FAILURE(::TextUtils_to_grid_ids(PARAMS));
+  // placeholder
+  EXPECT_EQ(0, ::TextUtils_to_grid_ids(&PARAMS, outIds, 2));
+}
+
+///
+/// @brief Tests TextUtils_to_grid_ids crashes on null PARAMS.
+TEST(TextUtilsToGridIdsDeathTest, NullParams) {
+  image_id outIds[10];
+  EXPECT_DEATH(::TextUtils_to_grid_ids(nullptr, outIds, 10), "");
+}
+
+///
+/// @brief Tests TextUtils_to_grid_ids crashes on null PARAMS->text.
+///
+TEST(TextUtilsToGridIdsDeathTest, NullText) {
+  TextGridParams params;
+  params.text = nullptr;
+  image_id outIds[10];
+  EXPECT_DEATH(::TextUtils_to_grid_ids(&params, outIds, 10), "");
+}
+
+///
+/// @brief Tests TextUtils_to_grid_ids crashes on null outIds.
+///
+TEST(TextUtilsToGridIdsDeathTest, NullOutIds) {
+  TextGridParams params{
+    .text = "Hello",
+  };
+  EXPECT_DEATH(::TextUtils_to_grid_ids(&params, nullptr, 10), "");
 }
 
 } // namespace
