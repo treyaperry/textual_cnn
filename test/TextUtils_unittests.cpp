@@ -66,7 +66,7 @@ TEST_P(CharToIdTest, CharToId) {
 /// @todo Implement tests once the function is implemented.
 ///
 TEST(TextUtilsToGridIdsTest, PlaceholderTest) {
-  const TextGridParams PARAMS{.text = "sample text", .width = 10, .maxRows = 2};
+  const TextGridParams PARAMS{.text = "sample text", .width = 1, .maxRows = 2};
   image_id outIds[2];
 
   // placeholder
