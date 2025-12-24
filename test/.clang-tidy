@@ -1,0 +1,9 @@
+---
+# Test-specific clang-tidy configuration
+# Inherits from parent but disables checks problematic with GoogleTest macros
+InheritParentConfig: true
+
+Checks: >
+  -readability-function-cognitive-complexity,
+  -readability-function-size,
+  -readability-magic-numbers
