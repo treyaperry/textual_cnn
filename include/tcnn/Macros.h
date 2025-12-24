@@ -10,4 +10,10 @@
 ///
 #define TCNN_ARRAY_LENGTH(arr) (sizeof(arr) / sizeof((arr)[0]))
 
+///
+/// @brief Stringify a macro argument.
+///
+#define TCNN_INTERNAL_STRINGIFY(x) #x
+#define TCNN_STRINGIFY(x) TCNN_INTERNAL_STRINGIFY(x)
+
 #endif // TCNN_MACROS_H

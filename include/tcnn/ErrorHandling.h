@@ -7,6 +7,8 @@
 
 #include <assert.h>
 
+#include "tcnn/Macros.h"
+
 // Debug-only diagnostic: prints in debug, compiles to no-op in release.
 #ifndef NDEBUG
 #include <stdio.h> // IWYU pragma: keep
@@ -24,44 +26,48 @@
 /// @{
 ///
 
-#define TCNN_ASSERT(CONDITION, MESSAGE)                                        \
+#define TCNN_ASSERT(condition, message)                                        \
   do {                                                                         \
-    if (!(CONDITION)) {                                                        \
-      TCNN_DIAG("Assertion failed: %s\nMessage: %s\n", #CONDITION, (MESSAGE)); \
-      assert(CONDITION);                                                       \
+    if (!(condition)) {                                                        \
+      TCNN_DIAG("Assertion failed: %s\nMessage: %s\n",                         \
+                TCNN_STRINGIFY(condition), (message));                         \
+      assert(condition);                                                       \
     }                                                                          \
   } while (0)
 
-#define TCNN_ASSERT_OR_RETURN(CONDITION, MESSAGE)                              \
+#define TCNN_ASSERT_OR_RETURN(condition, message)                              \
   do {                                                                         \
-    if (!(CONDITION)) {                                                        \
-      TCNN_DIAG("Assertion failed: %s\nMessage: %s\n", #CONDITION, (MESSAGE)); \
-      assert(CONDITION);                                                       \
+    if (!(condition)) {                                                        \
+      TCNN_DIAG("Assertion failed: %s\nMessage: %s\n",                         \
+                TCNN_STRINGIFY(condition), (message));                         \
+      assert(condition);                                                       \
       return;                                                                  \
     }                                                                          \
   } while (0)
 
-#define TCNN_ASSERT_OR_RETURN_VALUE(CONDITION, RETURN_VALUE, MESSAGE)          \
+#define TCNN_ASSERT_OR_RETURN_VALUE(condition, RETURN_VALUE, message)          \
   do {                                                                         \
-    if (!(CONDITION)) {                                                        \
-      TCNN_DIAG("Assertion failed: %s\nMessage: %s\n", #CONDITION, (MESSAGE)); \
-      assert(CONDITION);                                                       \
+    if (!(condition)) {                                                        \
+      TCNN_DIAG("Assertion failed: %s\nMessage: %s\n",                         \
+                TCNN_STRINGIFY(condition), (message));                         \
+      assert(condition);                                                       \
       return (RETURN_VALUE);                                                   \
     }                                                                          \
   } while (0)
 
-#define TCNN_ASSERT_OR_GOTO(CONDITION, LABEL, MESSAGE)                         \
+#define TCNN_ASSERT_OR_GOTO(condition, LABEL, message)                         \
   do {                                                                         \
-    if (!(CONDITION)) {                                                        \
-      TCNN_DIAG("Assertion failed: %s\nMessage: %s\n", #CONDITION, (MESSAGE)); \
-      assert(CONDITION);                                                       \
+    if (!(condition)) {                                                        \
+      TCNN_DIAG("Assertion failed: %s\nMessage: %s\n",                         \
+                TCNN_STRINGIFY(condition), (message));                         \
+      assert(condition);                                                       \
       goto LABEL;                                                              \
     }                                                                          \
   } while (0)
 
-#define TCNN_ASSERT_FAIL(MESSAGE)                                              \
+#define TCNN_ASSERT_FAIL(message)                                              \
   do {                                                                         \
-    TCNN_DIAG("Fatal assertion failure: %s\n", (MESSAGE));                     \
+    TCNN_DIAG("Fatal assertion failure: %s\n", (message));                     \
     assert(0);                                                                 \
     abort();                                                                   \
   } while (0)
