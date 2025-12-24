@@ -59,12 +59,12 @@ inline image_id TextUtils_char_to_id(const char CHARACTER) {
 /// @brief Converts a string of text into a grid of character IDs.
 /// @param params Parameters for the text grid conversion.
 /// @param outIds Output array to hold the character IDs.
-/// @param outIdsSize Size of the output array.
+/// @param outIdsCapacity Capacity of the output array.
 ///
 /// @return The number of character IDs written to the output array.
 ///
 size_t TextUtils_to_grid_ids(const TextGridParams *params, image_id *outIds,
-                           size_t outIdsSize);
+                           size_t outIdsCapacity);
 
 #ifdef __cplusplus
 } // extern "C"
