@@ -36,8 +36,7 @@ struct TextGridParams {
 /// @param CODE The character code to check.
 /// @return true if the character is printable, false otherwise.
 ///
-constexpr auto TextUtils_is_printable_char(const std::uint8_t CODE) noexcept
-    -> bool {
+constexpr auto is_printable_char(const std::uint8_t CODE) noexcept -> bool {
   return (image_id{CODE} >= TEXT_FIRST_PRINTABLE_CHAR &&
           image_id{CODE} <= TEXT_LAST_PRINTABLE_CHAR);
 }
@@ -49,9 +48,9 @@ constexpr auto TextUtils_is_printable_char(const std::uint8_t CODE) noexcept
 /// @param c The character to convert.
 /// @return The corresponding ID of the character.
 ///
-constexpr auto TextUtils_char_to_id(const char CHARACTER) noexcept -> image_id {
+constexpr auto char_to_id(const char CHARACTER) noexcept -> image_id {
   const auto CODE{static_cast<std::uint8_t>(CHARACTER)};
-  if (TextUtils_is_printable_char(CODE)) {
+  if (is_printable_char(CODE)) {
     return image_id{image_id{CODE}.value_of() +
                     TEXT_PRINTABLE_RANGE_OFFSET.value_of()};
   }
@@ -63,7 +62,7 @@ constexpr auto TextUtils_char_to_id(const char CHARACTER) noexcept -> image_id {
 /// @param params Parameters for the text grid conversion.
 ///
 /// @todo Implement this function - place holder for now.
-auto TextUtils_to_grid_ids(const TextGridParams &params) noexcept -> void;
+auto to_grid_ids(const TextGridParams &params) noexcept -> void;
 
 } // namespace tcnn
 
