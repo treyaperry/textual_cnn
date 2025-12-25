@@ -36,9 +36,9 @@ size_t TextUtils_to_grid_ids(const TextGridParams *PARAMS, image_id *outIds,
                               "PARAMS->width is 0");
   TCNN_ASSERT_OR_RETURN_VALUE(PARAMS->maxRows > 0, ZERO_WRITTEN_ELEMENTS,
                               "PARAMS->maxRows is 0");
-  TCNN_ASSERT_OR_RETURN_VALUE(outIdsCapacity >= (PARAMS->width * PARAMS->maxRows),
-                              ZERO_WRITTEN_ELEMENTS,
-                              "outIdsCapacity is too small");
+  TCNN_ASSERT_OR_RETURN_VALUE(
+      outIdsCapacity >= (PARAMS->width * PARAMS->maxRows),
+      ZERO_WRITTEN_ELEMENTS, "outIdsCapacity is too small");
 
   return TextUtils_to_grid_ids_impl(PARAMS, outIds, outIdsCapacity);
 }
