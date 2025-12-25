@@ -9,6 +9,9 @@
 
 namespace {
 
+using tcnn::image_id;
+using tcnn::TextGridParams;
+
 struct PrintableCharParam {
   std::uint8_t characterCode;
   bool expectedIsPrintable;
@@ -32,24 +35,25 @@ INSTANTIATE_TEST_SUITE_P(
 TEST_P(IsPrintableCharTest, IsPrintableChar) {
   const auto &param{GetParam()};
   EXPECT_EQ(param.expectedIsPrintable,
-            ::TextUtils_is_printable_char(param.characterCode));
+            tcnn::TextUtils_is_printable_char(param.characterCode));
 }
 
 struct CharToIdParam {
   char character;
-  image_id expectedId;
+  tcnn::image_id expectedId;
 };
 
 struct CharToIdTest : testing::TestWithParam<CharToIdParam> {};
 
 INSTANTIATE_TEST_SUITE_P(
     CharToId, CharToIdTest,
-    testing::Values(CharToIdParam{.character = ' ', .expectedId = 1},
-                    CharToIdParam{.character = 'A', .expectedId = 34},
-                    CharToIdParam{.character = '~', .expectedId = 95},
-                    CharToIdParam{.character = '\n',
-                                  .expectedId = 0}, // Non-printable character
-                    CharToIdParam{.character = '\t', .expectedId = 0}
+    testing::Values(CharToIdParam{.character = ' ', .expectedId = image_id{1}},
+                    CharToIdParam{.character = 'A', .expectedId = image_id{34}},
+                    CharToIdParam{.character = '~', .expectedId = image_id{95}},
+                    CharToIdParam{
+                        .character = '\n',
+                        .expectedId = image_id{0}}, // Non-printable character
+                    CharToIdParam{.character = '\t', .expectedId = image_id{0}}
                     // Non-printable character
                     ));
 
@@ -58,7 +62,7 @@ INSTANTIATE_TEST_SUITE_P(
 ///
 TEST_P(CharToIdTest, CharToId) {
   const auto &param{GetParam()};
-  EXPECT_EQ(param.expectedId, ::TextUtils_char_to_id(param.character));
+  EXPECT_EQ(param.expectedId, tcnn::TextUtils_char_to_id(param.character));
 }
 
 ///
@@ -66,11 +70,12 @@ TEST_P(CharToIdTest, CharToId) {
 /// @todo Implement tests once the function is implemented.
 ///
 TEST(TextUtilsToGridIdsTest, PlaceholderTest) {
-  const TextGridParams PARAMS{.text = "sample text", .width = 10, .maxRows = 2};
+  constexpr TextGridParams PARAMS{
+      .text = "sample text", .width = 10, .maxRows = 2};
 
   // Currently, the function is a placeholder and does not return any value.
   // This test simply ensures that the function can be called without errors.
-  EXPECT_NO_FATAL_FAILURE(::TextUtils_to_grid_ids(PARAMS));
+  EXPECT_NO_FATAL_FAILURE(tcnn::TextUtils_to_grid_ids(PARAMS));
 }
 
 } // namespace

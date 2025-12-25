@@ -7,23 +7,30 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <string_view>
 
-using image_id = std::int8_t;
+#include <strong_type/equality.hpp>
+#include <strong_type/ordered.hpp>
+#include <strong_type/strong_type.hpp>
 
-enum TextConstants : image_id {
-  TEXT_CONSTANTS_PAD_ID = 0,
-  TEXT_CONSTANTS_VOCAB_SIZE =
-      96, // Number of printable ASCII characters (from space to ~)
-  TEXT_CONSTANTS_FIRST_PRINTABLE_CHAR = 32,
-  TEXT_CONSTANTS_LAST_PRINTABLE_CHAR = 126,
-  TEXT_CONSTANTS_PRINTABLE_RANGE_OFFSET = -31,
-};
+namespace tcnn {
+
+using image_id = strong::type<std::int8_t, struct image_id_tag, strong::ordered,
+                              strong::equality>;
+
+inline constexpr image_id TEXT_PAD_ID{0};
+inline constexpr image_id TEXT_VOCAB_SIZE{96}; // Number of printable ASCII
+                                               // characters (from space to ~)
+inline constexpr image_id TEXT_FIRST_PRINTABLE_CHAR{32};
+inline constexpr image_id TEXT_LAST_PRINTABLE_CHAR{126};
+inline constexpr image_id TEXT_PRINTABLE_RANGE_OFFSET{-31};
 
 struct TextGridParams {
-  const char *text = nullptr;
-  std::size_t width = 0;
-  std::size_t maxRows = 0;
+  std::string_view text;
+  std::size_t width{0};
+  std::size_t maxRows{0};
 };
+
 ///
 /// @brief Checks if a character code is a printable ASCII character.
 /// @param CODE The character code to check.
@@ -31,8 +38,8 @@ struct TextGridParams {
 ///
 constexpr auto TextUtils_is_printable_char(const std::uint8_t CODE) noexcept
     -> bool {
-  return (CODE >= TEXT_CONSTANTS_FIRST_PRINTABLE_CHAR &&
-          CODE <= TEXT_CONSTANTS_LAST_PRINTABLE_CHAR);
+  return (image_id{CODE} >= TEXT_FIRST_PRINTABLE_CHAR &&
+          image_id{CODE} <= TEXT_LAST_PRINTABLE_CHAR);
 }
 
 ///
@@ -45,10 +52,10 @@ constexpr auto TextUtils_is_printable_char(const std::uint8_t CODE) noexcept
 constexpr auto TextUtils_char_to_id(const char CHARACTER) noexcept -> image_id {
   const auto CODE{static_cast<std::uint8_t>(CHARACTER)};
   if (TextUtils_is_printable_char(CODE)) {
-    return static_cast<image_id>(static_cast<image_id>(CODE) +
-                                 TEXT_CONSTANTS_PRINTABLE_RANGE_OFFSET);
+    return image_id{image_id{CODE}.value_of() +
+                    TEXT_PRINTABLE_RANGE_OFFSET.value_of()};
   }
-  return TEXT_CONSTANTS_PAD_ID;
+  return TEXT_PAD_ID;
 }
 
 ///
@@ -57,5 +64,7 @@ constexpr auto TextUtils_char_to_id(const char CHARACTER) noexcept -> image_id {
 ///
 /// @todo Implement this function - place holder for now.
 auto TextUtils_to_grid_ids(const TextGridParams &params) noexcept -> void;
+
+} // namespace tcnn
 
 #endif // TCNN_TEXT_UTILS_H
