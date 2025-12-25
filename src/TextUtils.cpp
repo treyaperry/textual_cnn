@@ -9,9 +9,9 @@ auto to_grid_ids(const TextGridParams &PARAMS,
   TCNN_ASSERT_OR_RETURN(PARAMS.width > 0, "Width must be greater than zero.");
   TCNN_ASSERT_OR_RETURN(PARAMS.maxRows > 0,
                         "Max rows must be greater than zero.");
-  const auto MAX_TEXT_LENGTH{PARAMS.width * PARAMS.maxRows};
 
   // Preallocate maximum output size to avoid reallocations.
+  const auto MAX_TEXT_LENGTH{PARAMS.width * PARAMS.maxRows};
   outIds.clear();
   outIds.reserve(MAX_TEXT_LENGTH);
 }
