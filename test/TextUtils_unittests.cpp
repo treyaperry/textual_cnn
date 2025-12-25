@@ -35,7 +35,7 @@ INSTANTIATE_TEST_SUITE_P(
 TEST_P(IsPrintableCharTest, IsPrintableChar) {
   const auto &param{GetParam()};
   EXPECT_EQ(param.expectedIsPrintable,
-            tcnn::TextUtils_is_printable_char(param.characterCode));
+            tcnn::is_printable_char(param.characterCode));
 }
 
 struct CharToIdParam {
@@ -62,7 +62,7 @@ INSTANTIATE_TEST_SUITE_P(
 ///
 TEST_P(CharToIdTest, CharToId) {
   const auto &param{GetParam()};
-  EXPECT_EQ(param.expectedId, tcnn::TextUtils_char_to_id(param.character));
+  EXPECT_EQ(param.expectedId, tcnn::char_to_id(param.character));
 }
 
 ///
@@ -75,7 +75,7 @@ TEST(TextUtilsToGridIdsTest, PlaceholderTest) {
 
   // Currently, the function is a placeholder and does not return any value.
   // This test simply ensures that the function can be called without errors.
-  EXPECT_NO_FATAL_FAILURE(tcnn::TextUtils_to_grid_ids(PARAMS));
+  EXPECT_NO_FATAL_FAILURE(tcnn::to_grid_ids(PARAMS));
 }
 
 } // namespace
