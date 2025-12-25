@@ -36,7 +36,10 @@ static bool insert_pad_if_empty(const size_t TEXT_LENGTH, image_id *outIds) {
   if (TEXT_LENGTH > 0) {
     return false;
   }
-  fill_with_pad_ids(0, 1, outIds);
+
+  constexpr size_t START_INDEX = 0;
+  constexpr size_t END_INDEX = 1;
+  fill_with_pad_ids(START_INDEX, END_INDEX, outIds);
   return true;
 }
 
