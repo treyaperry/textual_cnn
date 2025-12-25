@@ -36,7 +36,8 @@ struct TextGridParams {
 /// @param CODE The character code to check.
 /// @return true if the character is printable, false otherwise.
 ///
-constexpr auto is_printable_char(const std::uint8_t CODE) noexcept -> bool {
+[[nodiscard]] constexpr auto is_printable_char(const std::uint8_t CODE) noexcept
+    -> bool {
   return (image_id{CODE} >= TEXT_FIRST_PRINTABLE_CHAR &&
           image_id{CODE} <= TEXT_LAST_PRINTABLE_CHAR);
 }
@@ -48,7 +49,8 @@ constexpr auto is_printable_char(const std::uint8_t CODE) noexcept -> bool {
 /// @param c The character to convert.
 /// @return The corresponding ID of the character.
 ///
-constexpr auto char_to_id(const char CHARACTER) noexcept -> image_id {
+[[nodiscard]] constexpr auto char_to_id(const char CHARACTER) noexcept
+    -> image_id {
   const auto CODE{static_cast<std::uint8_t>(CHARACTER)};
   if (is_printable_char(CODE)) {
     return image_id{image_id{CODE}.value_of() +
