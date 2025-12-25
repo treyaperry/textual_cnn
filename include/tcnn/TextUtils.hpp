@@ -2,8 +2,8 @@
 /// @par Text / character utilities
 ///
 
-#ifndef TCNN_TEXT_UTILS_H
-#define TCNN_TEXT_UTILS_H
+#ifndef TCNN_TEXT_UTILS_HPP
+#define TCNN_TEXT_UTILS_HPP
 
 #include <cstddef>
 #include <cstdint>
@@ -68,4 +68,4 @@ auto to_grid_ids(const TextGridParams &params) noexcept -> void;
 
 } // namespace tcnn
 
-#endif // TCNN_TEXT_UTILS_H
+#endif // TCNN_TEXT_UTILS_HPP
