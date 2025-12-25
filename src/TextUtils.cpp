@@ -10,10 +10,9 @@ auto to_grid_ids(const TextGridParams &PARAMS,
   TCNN_ASSERT_OR_RETURN(PARAMS.maxRows > 0,
                         "Max rows must be greater than zero.");
 
-  // Preallocate maximum output size to avoid reallocations.
-  const auto MAX_TEXT_LENGTH{PARAMS.width * PARAMS.maxRows};
   outIds.clear();
-  outIds.reserve(MAX_TEXT_LENGTH);
+  // Preallocate maximum output size to avoid reallocations.
+  outIds.reserve(PARAMS.width * PARAMS.maxRows);
 }
 
 } // namespace tcnn
