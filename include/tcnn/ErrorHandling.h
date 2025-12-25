@@ -12,6 +12,7 @@
 // Debug-only diagnostic: prints in debug, compiles to no-op in release.
 #ifndef NDEBUG
 #include <stdio.h> // IWYU pragma: keep
+// NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 #define TCNN_DIAG(...) fprintf(stderr, __VA_ARGS__)
 #else
 #define TCNN_DIAG(...) ((void)0)
