@@ -98,12 +98,12 @@ static size_t compute_grid_size(const TextGridParams *const PARAMS,
 ///
 static size_t to_grid_ids_impl(const TextGridParams *PARAMS,
                                const size_t MAX_TEXT_LENGTH, image_id *outIds) {
-  const size_t TEXT_LENGTH =
+  const size_t IDS_CONVERTED_COUNT =
       convert_to_ids(PARAMS->text, MAX_TEXT_LENGTH, outIds);
 
-  const size_t GRID_SIZE = compute_grid_size(PARAMS, TEXT_LENGTH);
+  const size_t GRID_SIZE = compute_grid_size(PARAMS, IDS_CONVERTED_COUNT);
 
-  fill_with_pad_ids(TEXT_LENGTH, GRID_SIZE, outIds);
+  fill_with_pad_ids(IDS_CONVERTED_COUNT, GRID_SIZE, outIds);
 
   return GRID_SIZE;
 }
