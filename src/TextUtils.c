@@ -15,14 +15,11 @@ enum WrittenElements : size_t {
 /// @param PARAMS Parameters for the text grid conversion.
 /// @param MAX_TEXT_LENGTH Pre-calculated maximum length of text to process.
 /// @param outIds Output array to hold the character IDs.
-/// @param OUT_IDS_CAPACITY Capacity of the output array.
 ///
 /// @return The number of character IDs written to the output array.
 ///
-static size_t TextUtils_to_grid_ids_impl(const TextGridParams *PARAMS,
-                                         const size_t MAX_TEXT_LENGTH,
-                                         image_id *outIds,
-                                         const size_t OUT_IDS_CAPACITY) {
+static size_t to_grid_ids_impl(const TextGridParams *PARAMS,
+                               const size_t MAX_TEXT_LENGTH, image_id *outIds) {
   return 0;
 }
 
@@ -44,6 +41,5 @@ size_t TextUtils_to_grid_ids(const TextGridParams *PARAMS, image_id *outIds,
                               ZERO_WRITTEN_ELEMENTS,
                               "OUT_IDS_CAPACITY is too small");
 
-  return TextUtils_to_grid_ids_impl(PARAMS, MAX_TEXT_LENGTH, outIds,
-                                    OUT_IDS_CAPACITY);
+  return to_grid_ids_impl(PARAMS, MAX_TEXT_LENGTH, outIds);
 }
