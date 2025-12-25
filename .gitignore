@@ -142,3 +142,4 @@ tags
 # Custom ignores
 build/
 .cache/
+.vscode/
