@@ -2,7 +2,7 @@
 /// @par Tests for TextUtils functions.
 ///
 
-#include "tcnn/TextUtils.h"
+#include "tcnn/TextUtils.hpp"
 
 #include <cstdint>
 #include <gtest/gtest.h>

@@ -5,15 +5,10 @@
 #ifndef TCNN_TEXT_UTILS_H
 #define TCNN_TEXT_UTILS_H
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
+#include <cstddef>
+#include <cstdint>
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
-
-typedef int8_t image_id;
+using image_id = std::int8_t;
 
 enum TextConstants : image_id {
   TEXT_CONSTANTS_PAD_ID = 0,
@@ -24,20 +19,20 @@ enum TextConstants : image_id {
   TEXT_CONSTANTS_PRINTABLE_RANGE_OFFSET = -31,
 };
 
-typedef struct {
-  const char *text;
-  size_t width;
-  size_t maxRows;
-} TextGridParams;
-
+struct TextGridParams {
+  const char *text = nullptr;
+  std::size_t width = 0;
+  std::size_t maxRows = 0;
+};
 ///
 /// @brief Checks if a character code is a printable ASCII character.
 /// @param CODE The character code to check.
 /// @return true if the character is printable, false otherwise.
 ///
-inline bool TextUtils_is_printable_char(const uint8_t CODE) {
-  return (bool)(CODE >= TEXT_CONSTANTS_FIRST_PRINTABLE_CHAR &&
-                CODE <= TEXT_CONSTANTS_LAST_PRINTABLE_CHAR);
+constexpr auto TextUtils_is_printable_char(const std::uint8_t CODE) noexcept
+    -> bool {
+  return (CODE >= TEXT_CONSTANTS_FIRST_PRINTABLE_CHAR &&
+          CODE <= TEXT_CONSTANTS_LAST_PRINTABLE_CHAR);
 }
 
 ///
@@ -47,10 +42,11 @@ inline bool TextUtils_is_printable_char(const uint8_t CODE) {
 /// @param c The character to convert.
 /// @return The corresponding ID of the character.
 ///
-inline image_id TextUtils_char_to_id(const char CHARACTER) {
-  const uint8_t CODE = (uint8_t)CHARACTER;
+constexpr auto TextUtils_char_to_id(const char CHARACTER) noexcept -> image_id {
+  const auto CODE{static_cast<std::uint8_t>(CHARACTER)};
   if (TextUtils_is_printable_char(CODE)) {
-    return (image_id)((image_id)CODE + TEXT_CONSTANTS_PRINTABLE_RANGE_OFFSET);
+    return static_cast<image_id>(static_cast<image_id>(CODE) +
+                                 TEXT_CONSTANTS_PRINTABLE_RANGE_OFFSET);
   }
   return TEXT_CONSTANTS_PAD_ID;
 }
@@ -60,10 +56,6 @@ inline image_id TextUtils_char_to_id(const char CHARACTER) {
 /// @param params Parameters for the text grid conversion.
 ///
 /// @todo Implement this function - place holder for now.
-void TextUtils_to_grid_ids(TextGridParams params);
-
-#ifdef __cplusplus
-} // extern "C"
-#endif // __cplusplus
+auto TextUtils_to_grid_ids(const TextGridParams &params) noexcept -> void;
 
 #endif // TCNN_TEXT_UTILS_H
