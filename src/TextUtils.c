@@ -3,6 +3,7 @@
 #include "tcnn/Macros.h"
 
 #include <stddef.h>
+#include <string.h>
 
 constexpr size_t ZERO_WRITTEN_ELEMENTS = 0;
 
@@ -15,9 +16,13 @@ constexpr size_t ZERO_WRITTEN_ELEMENTS = 0;
 // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
 static void fill_with_pad_ids(const size_t START_INDEX, const size_t END_INDEX,
                               image_id *outIds) {
-  for (size_t i = START_INDEX; i < END_INDEX; ++i) {
-    outIds[i] = TEXT_CONSTANTS_PAD_ID;
+  if (START_INDEX > END_INDEX) {
+    return;
   }
+
+  // The below buffer handling is safe because the length is controlled.
+  // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+  memset(&outIds[START_INDEX], TEXT_CONSTANTS_PAD_ID, END_INDEX - START_INDEX);
 }
 
 ///
