@@ -13,19 +13,21 @@ enum WrittenElements : size_t {
 /// This function is called when all input validation checks have passed.
 ///
 /// @param PARAMS Parameters for the text grid conversion.
+/// @param MAX_TEXT_LENGTH Pre-calculated maximum length of text to process.
 /// @param outIds Output array to hold the character IDs.
-/// @param outIdsCapacity Capacity of the output array.
+/// @param OUT_IDS_CAPACITY Capacity of the output array.
 ///
 /// @return The number of character IDs written to the output array.
 ///
 static size_t TextUtils_to_grid_ids_impl(const TextGridParams *PARAMS,
+                                         const size_t MAX_TEXT_LENGTH,
                                          image_id *outIds,
-                                         size_t outIdsCapacity) {
+                                         const size_t OUT_IDS_CAPACITY) {
   return 0;
 }
 
 size_t TextUtils_to_grid_ids(const TextGridParams *PARAMS, image_id *outIds,
-                             size_t outIdsCapacity) {
+                             const size_t OUT_IDS_CAPACITY) {
   TCNN_ASSERT_OR_RETURN_VALUE(PARAMS != NULL, ZERO_WRITTEN_ELEMENTS,
                               "PARAMS is NULL");
   TCNN_ASSERT_OR_RETURN_VALUE(PARAMS->text != NULL, ZERO_WRITTEN_ELEMENTS,
@@ -36,9 +38,12 @@ size_t TextUtils_to_grid_ids(const TextGridParams *PARAMS, image_id *outIds,
                               "PARAMS->width is 0");
   TCNN_ASSERT_OR_RETURN_VALUE(PARAMS->maxRows > 0, ZERO_WRITTEN_ELEMENTS,
                               "PARAMS->maxRows is 0");
-  TCNN_ASSERT_OR_RETURN_VALUE(
-      outIdsCapacity >= (PARAMS->width * PARAMS->maxRows),
-      ZERO_WRITTEN_ELEMENTS, "outIdsCapacity is too small");
 
-  return TextUtils_to_grid_ids_impl(PARAMS, outIds, outIdsCapacity);
+  const size_t MAX_TEXT_LENGTH = PARAMS->width * PARAMS->maxRows;
+  TCNN_ASSERT_OR_RETURN_VALUE(OUT_IDS_CAPACITY >= MAX_TEXT_LENGTH,
+                              ZERO_WRITTEN_ELEMENTS,
+                              "OUT_IDS_CAPACITY is too small");
+
+  return TextUtils_to_grid_ids_impl(PARAMS, MAX_TEXT_LENGTH, outIds,
+                                    OUT_IDS_CAPACITY);
 }
