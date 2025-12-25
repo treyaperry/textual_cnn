@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <gtest/gtest.h>
+#include <vector>
 
 namespace {
 
@@ -73,9 +74,14 @@ TEST(TextUtilsToGridIdsTest, PlaceholderTest) {
   constexpr TextGridParams PARAMS{
       .text = "sample text", .width = 10, .maxRows = 2};
 
+  std::vector<image_id> outIds;
+
   // Currently, the function is a placeholder and does not return any value.
   // This test simply ensures that the function can be called without errors.
-  EXPECT_NO_FATAL_FAILURE(tcnn::to_grid_ids(PARAMS));
+  EXPECT_NO_FATAL_FAILURE(tcnn::to_grid_ids(PARAMS, outIds));
+  EXPECT_EQ(outIds.size(), 0); // Since the function is not implemented yet
+  EXPECT_EQ(outIds.capacity(),
+            PARAMS.width * PARAMS.maxRows); // Preallocated size.
 }
 
 } // namespace
