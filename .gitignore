@@ -143,3 +143,4 @@ tags
 build/
 .cache/
 .vscode/
+data/textual_cnn/training/
