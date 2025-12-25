@@ -1,9 +1,89 @@
 #include "tcnn/TextUtils.h"
 #include "tcnn/ErrorHandling.h"
+#include "tcnn/Macros.h"
 
 #include <stddef.h>
 
 constexpr size_t ZERO_WRITTEN_ELEMENTS = 0;
+
+///
+/// @brief Fills a range in the output array with PAD_IDs.
+/// @param START_INDEX Starting index of the range (inclusive).
+/// @param END_INDEX Ending index of the range (exclusive).
+/// @param outIds Output array to hold the character IDs.
+///
+// NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
+static void fill_with_pad_ids(const size_t START_INDEX, const size_t END_INDEX,
+                              image_id *outIds) {
+  for (size_t i = START_INDEX; i < END_INDEX; ++i) {
+    outIds[i] = TEXT_CONSTANTS_PAD_ID;
+  }
+}
+
+///
+/// @brief Pads the output with a PAD_ID if the text is empty.
+/// @param TEXT_LENGTH Length of the input
+/// @param outIds Output array to hold the character IDS.
+///
+/// @return True if padding was added, false otherwise.
+///
+static bool insert_pad_if_empty(const size_t TEXT_LENGTH, image_id *outIds) {
+  if (TEXT_LENGTH > 0) {
+    return false;
+  }
+  fill_with_pad_ids(0, 1, outIds);
+  return true;
+}
+
+///
+/// @brief Converts text to character IDs.
+/// @param TEXT Input text to convert.
+/// @param MAX_TEXT_LENGTH Maximum length of text to process.
+/// @param outIds Output array to hold the character IDs.
+///
+/// @return The number of character IDs written to the output array.
+///
+static size_t convert_to_ids(const char *const TEXT,
+                             const size_t MAX_TEXT_LENGTH, image_id *outIds) {
+  size_t textLength = 0;
+  const char *currentChar = TEXT;
+  while ((*currentChar != '\0') && (textLength < MAX_TEXT_LENGTH)) {
+    outIds[textLength] = TextUtils_char_to_id(*currentChar);
+    ++textLength;
+    ++currentChar;
+  }
+
+  if (insert_pad_if_empty(textLength, outIds)) {
+    ++textLength;
+  }
+  return textLength;
+}
+
+///
+/// @brief Computes the required number of rows for the text grid.
+/// @param PARAMS Parameters for the text grid conversion.
+/// @param TEXT_LENGTH Length of the input text.
+///
+/// @return The required number of rows.
+///
+static size_t compute_required_rows(const TextGridParams *const PARAMS,
+                                    const size_t TEXT_LENGTH) {
+  const size_t ROWS = (TEXT_LENGTH + PARAMS->width - 1) / PARAMS->width;
+  return TCNN_MIN(ROWS, PARAMS->maxRows);
+}
+
+///
+/// @brief Computes the grid size based on parameters and text length.
+/// @param PARAMS Parameters for the text grid conversion.
+/// @param TEXT_LENGTH Length of the input text.
+///
+/// @return The grid capacity.
+///
+static size_t compute_grid_size(const TextGridParams *const PARAMS,
+                                const size_t TEXT_LENGTH) {
+  const size_t REQUIRED_ROWS = compute_required_rows(PARAMS, TEXT_LENGTH);
+  return REQUIRED_ROWS * PARAMS->width;
+}
 
 ///
 /// @brief To grid ids implementation.
@@ -18,7 +98,14 @@ constexpr size_t ZERO_WRITTEN_ELEMENTS = 0;
 ///
 static size_t to_grid_ids_impl(const TextGridParams *PARAMS,
                                const size_t MAX_TEXT_LENGTH, image_id *outIds) {
-  return 0;
+  const size_t TEXT_LENGTH =
+      convert_to_ids(PARAMS->text, MAX_TEXT_LENGTH, outIds);
+
+  const size_t GRID_SIZE = compute_grid_size(PARAMS, TEXT_LENGTH);
+
+  fill_with_pad_ids(TEXT_LENGTH, GRID_SIZE, outIds);
+
+  return GRID_SIZE;
 }
 
 size_t TextUtils_to_grid_ids(const TextGridParams *PARAMS, image_id *outIds,
