@@ -4,6 +4,7 @@ Checks: >
   clang-analyzer-*,
   performance-*,
   readability-*,
+  -readability-identifier-length,
   portability-*
 
 # Use the .clang-format file to format.

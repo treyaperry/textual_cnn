@@ -4,6 +4,7 @@
 
 #include "tcnn/TextUtils.hpp"
 
+#include <algorithm>
 #include <cstdint>
 #include <gtest/gtest.h>
 #include <vector>
@@ -76,14 +77,10 @@ TEST(TextUtilsToGridIdsTest /*unused*/, PlaceholderTest /*unused*/) {
   constexpr TextGridParams params{
       .text = "sample text", .width = 10, .max_rows = 2};
 
-  std::vector<image_id> outIds;
-
-  // Currently, the function is a placeholder and does not return any value.
-  // This test simply ensures that the function can be called without errors.
-  EXPECT_NO_FATAL_FAILURE(tcnn::to_grid_ids(PARAMS, outIds));
-  EXPECT_EQ(outIds.size(), 0); // Since the function is not implemented yet
-  EXPECT_EQ(outIds.capacity(),
-            PARAMS.width * PARAMS.maxRows); // Preallocated size.
+  const auto ids{tcnn::to_grid_ids(params)};
+  EXPECT_EQ(ids.size(), params.width * params.max_rows);
+  EXPECT_TRUE(std::ranges::all_of(
+      ids, [](const auto id) { return id == tcnn::text_pad_id; }));
 }
 
 } // namespace
