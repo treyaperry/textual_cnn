@@ -4,6 +4,7 @@ Checks: >
   clang-analyzer-*,
   performance-*,
   readability-*,
+  -readability-identifier-length,
   portability-*
 
 # Use the .clang-format file to format.
@@ -11,9 +12,15 @@ FormatStyle: 'file'
 
 CheckOptions:
   # Enforce specific identifier naming conventions (highly customizable)
-  - key: readability-identifier-naming.ConstantCase
-    value: UPPER_CASE
-  - key: readability-identifier-naming.ConstantPrefix
-    value: ''
   - key: readability-function-cognitive-complexity.Threshold
     value: 75
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypedefCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypeAliasCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase

@@ -4,13 +4,14 @@
 
 #include "tcnn/TextUtils.hpp"
 
+#include <algorithm>
 #include <cstdint>
 #include <gtest/gtest.h>
 #include <vector>
 
 namespace {
 
-using tcnn::image_id;
+using tcnn::ImageId;
 using tcnn::TextGridParams;
 
 struct PrintableCharParam {
@@ -41,20 +42,20 @@ TEST_P(IsPrintableCharTest, IsPrintableChar) {
 
 struct CharToIdParam {
   char character;
-  tcnn::image_id expectedId;
+  tcnn::ImageId expectedId;
 };
 
 struct CharToIdTest : testing::TestWithParam<CharToIdParam> {};
 
 INSTANTIATE_TEST_SUITE_P(
     CharToId, CharToIdTest,
-    testing::Values(CharToIdParam{.character = ' ', .expectedId = image_id{1}},
-                    CharToIdParam{.character = 'A', .expectedId = image_id{34}},
-                    CharToIdParam{.character = '~', .expectedId = image_id{95}},
+    testing::Values(CharToIdParam{.character = ' ', .expectedId = ImageId{1}},
+                    CharToIdParam{.character = 'A', .expectedId = ImageId{34}},
+                    CharToIdParam{.character = '~', .expectedId = ImageId{95}},
                     CharToIdParam{
                         .character = '\n',
-                        .expectedId = image_id{0}}, // Non-printable character
-                    CharToIdParam{.character = '\t', .expectedId = image_id{0}}
+                        .expectedId = ImageId{0}}, // Non-printable character
+                    CharToIdParam{.character = '\t', .expectedId = ImageId{0}}
                     // Non-printable character
                     ));
 
@@ -71,17 +72,13 @@ TEST_P(CharToIdTest, CharToId) {
 /// @todo Implement tests once the function is implemented.
 ///
 TEST(TextUtilsToGridIdsTest, PlaceholderTest) {
-  constexpr TextGridParams PARAMS{
+  constexpr TextGridParams params{
       .text = "sample text", .width = 10, .maxRows = 2};
 
-  std::vector<image_id> outIds;
-
-  // Currently, the function is a placeholder and does not return any value.
-  // This test simply ensures that the function can be called without errors.
-  EXPECT_NO_FATAL_FAILURE(tcnn::to_grid_ids(PARAMS, outIds));
-  EXPECT_EQ(outIds.size(), 0); // Since the function is not implemented yet
-  EXPECT_EQ(outIds.capacity(),
-            PARAMS.width * PARAMS.maxRows); // Preallocated size.
+  const auto ids{tcnn::to_grid_ids(params)};
+  EXPECT_EQ(ids.size(), params.width * params.maxRows);
+  EXPECT_TRUE(std::ranges::all_of(
+      ids, [](const auto id) { return id == tcnn::text_pad_id; }));
 }
 
 } // namespace
