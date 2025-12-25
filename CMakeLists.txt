@@ -22,12 +22,14 @@ FetchContent_Declare(
     strong_type
     GIT_REPOSITORY git@github.com:rollbear/strong_type.git
     GIT_TAG v15
+    SYSTEM
 )
 
 FetchContent_Declare(
     googletest
     GIT_REPOSITORY git@github.com:google/googletest.git
     GIT_TAG v1.17.0
+    SYSTEM
 )
 
 FetchContent_MakeAvailable(strong_type)
