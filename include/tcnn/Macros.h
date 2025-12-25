@@ -16,4 +16,7 @@
 #define TCNN_INTERNAL_STRINGIFY(x) #x
 #define TCNN_STRINGIFY(x) TCNN_INTERNAL_STRINGIFY(x)
 
+#define TCNN_MIN(a, b) ((a) < (b) ? (a) : (b))
+#define TCNN_MAX(a, b) ((a) > (b) ? (a) : (b))
+
 #endif // TCNN_MACROS_H
