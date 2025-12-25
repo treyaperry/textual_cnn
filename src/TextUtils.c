@@ -54,7 +54,7 @@ static size_t convert_to_ids(const char *const TEXT,
   }
 
   if (insert_pad_if_empty(textLength, outIds)) {
-    ++textLength;
+    textLength = 1;
   }
   return textLength;
 }
