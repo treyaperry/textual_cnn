@@ -15,3 +15,5 @@ CheckOptions:
     value: UPPER_CASE
   - key: readability-identifier-naming.ConstantPrefix
     value: ''
+  - key: readability-function-cognitive-complexity.Threshold
+    value: 75
