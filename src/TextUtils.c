@@ -3,9 +3,7 @@
 
 #include <stddef.h>
 
-enum WrittenElements : size_t {
-  ZERO_WRITTEN_ELEMENTS = 0,
-};
+constexpr size_t ZERO_WRITTEN_ELEMENTS = 0;
 
 ///
 /// @brief To grid ids implementation.
