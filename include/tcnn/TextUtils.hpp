@@ -66,7 +66,8 @@ struct TextGridParams {
 /// @return A vector of character IDs representing the text grid.
 ///
 /// @todo Implement this function - place holder for now.
-auto to_grid_ids(const TextGridParams &params) noexcept -> std::vector<ImageId>;
+[[nodiscard]] auto to_grid_ids(const TextGridParams &params) noexcept
+    -> std::vector<ImageId>;
 
 } // namespace tcnn
 
