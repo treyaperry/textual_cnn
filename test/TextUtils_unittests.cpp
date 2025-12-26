@@ -9,12 +9,12 @@
 
 namespace {
 
-using tcnn::image_id;
+using tcnn::ImageId;
 using tcnn::TextGridParams;
 
 struct PrintableCharParam {
-  std::uint8_t characterCode;
-  bool expectedIsPrintable;
+  std::uint8_t character_code;
+  bool expected_is_printable;
 };
 
 struct IsPrintableCharTest : testing::TestWithParam<PrintableCharParam> {};
@@ -22,60 +22,62 @@ struct IsPrintableCharTest : testing::TestWithParam<PrintableCharParam> {};
 INSTANTIATE_TEST_SUITE_P(
     IsPrintableChar, IsPrintableCharTest,
     testing::Values(
-        PrintableCharParam{.characterCode = 31, .expectedIsPrintable = false},
-        PrintableCharParam{.characterCode = 32, .expectedIsPrintable = true},
-        PrintableCharParam{.characterCode = 65, .expectedIsPrintable = true},
-        PrintableCharParam{.characterCode = 126, .expectedIsPrintable = true},
-        PrintableCharParam{.characterCode = 127,
-                           .expectedIsPrintable = false}));
+        PrintableCharParam{.character_code = 31,
+                           .expected_is_printable = false},
+        PrintableCharParam{.character_code = 32, .expected_is_printable = true},
+        PrintableCharParam{.character_code = 65, .expected_is_printable = true},
+        PrintableCharParam{.character_code = 126,
+                           .expected_is_printable = true},
+        PrintableCharParam{.character_code = 127,
+                           .expected_is_printable = false}));
 
 ///
 /// @brief Tests if an unsigned character code is printable.
 ///
-TEST_P(IsPrintableCharTest, IsPrintableChar) {
+TEST_P(IsPrintableCharTest /*unused*/, IsPrintableChar /*unused*/) {
   const auto &param{GetParam()};
-  EXPECT_EQ(param.expectedIsPrintable,
-            tcnn::is_printable_char(param.characterCode));
+  EXPECT_EQ(param.expected_is_printable,
+            tcnn::is_printable_char(param.character_code));
 }
 
 struct CharToIdParam {
   char character;
-  tcnn::image_id expectedId;
+  tcnn::ImageId expected_id;
 };
 
 struct CharToIdTest : testing::TestWithParam<CharToIdParam> {};
 
 INSTANTIATE_TEST_SUITE_P(
     CharToId, CharToIdTest,
-    testing::Values(CharToIdParam{.character = ' ', .expectedId = image_id{1}},
-                    CharToIdParam{.character = 'A', .expectedId = image_id{34}},
-                    CharToIdParam{.character = '~', .expectedId = image_id{95}},
+    testing::Values(CharToIdParam{.character = ' ', .expected_id = ImageId{1}},
+                    CharToIdParam{.character = 'A', .expected_id = ImageId{34}},
+                    CharToIdParam{.character = '~', .expected_id = ImageId{95}},
                     CharToIdParam{
                         .character = '\n',
-                        .expectedId = image_id{0}}, // Non-printable character
-                    CharToIdParam{.character = '\t', .expectedId = image_id{0}}
+                        .expected_id = ImageId{0}}, // Non-printable character
+                    CharToIdParam{.character = '\t', .expected_id = ImageId{0}}
                     // Non-printable character
                     ));
 
 ///
 /// @brief Tests conversion from character to ID.
 ///
-TEST_P(CharToIdTest, CharToId) {
+TEST_P(CharToIdTest /*unused*/, CharToId /*unused*/) {
   const auto &param{GetParam()};
-  EXPECT_EQ(param.expectedId, tcnn::char_to_id(param.character));
+  EXPECT_EQ(param.expected_id, tcnn::char_to_id(param.character));
 }
 
 ///
 /// @brief Placeholder test for TextUtils_to_grid_ids function.
 /// @todo Implement tests once the function is implemented.
 ///
-TEST(TextUtilsToGridIdsTest, PlaceholderTest) {
-  constexpr TextGridParams PARAMS{
-      .text = "sample text", .width = 10, .maxRows = 2};
+TEST(TextUtilsToGridIdsTest /*unused*/, PlaceholderTest /*unused*/) {
+  constexpr TextGridParams params{
+      .text = "sample text", .width = 10, .max_rows = 2};
 
   // Currently, the function is a placeholder and does not return any value.
   // This test simply ensures that the function can be called without errors.
-  EXPECT_NO_FATAL_FAILURE(tcnn::to_grid_ids(PARAMS));
+  EXPECT_NO_FATAL_FAILURE(tcnn::to_grid_ids(params));
 }
 
 } // namespace
