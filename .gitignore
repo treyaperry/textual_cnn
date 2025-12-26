@@ -141,3 +141,6 @@ tags
 
 # Custom ignores
 build/
+.vscode/
+.cache/
+data/textual_cnn/training/

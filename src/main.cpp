@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 
 ///
 /// @brief Main entry point of the program.
@@ -6,7 +6,7 @@
 /// @param argv Argument vector.
 /// @return Exit status code.
 ///
-int main(const int argc, const char **argv) {
-  printf("Hello, World!\n");
+auto main(const int argc, const char **argv) noexcept -> int {
+  std::cout << "Hello, World!\n";
   return 0;
 }
