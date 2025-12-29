@@ -15,9 +15,31 @@ A convolutional neural network which converts text to an "image" to check for AI
 5) Global average pooling produces a single document representation: After the convolutional lifting, global average pooling reduces (B, C, H, W) to (B, C), which feeds into fully connected layers to output a single logit to sigmoid to AI-generated probability for the entire text
 
 ## Training Data
-In order to train the data, you will need to:
-- download the csv of the text used at this url - https://www.kaggle.com/datasets/shanegerami/ai-vs-human-text?resource=download
-- place the csv in the location ./data/textual_cnn/training/ 
+
+### Quick Setup
+You can use the automated setup script to download the dataset:
+
+1. Get your Kaggle API token:
+   - Visit https://www.kaggle.com/settings/
+   - Scroll to the 'API' section and click 'Create New Token'
+   - Add the token to your environment:
+     ```bash
+     echo 'export KAGGLE_API_TOKEN=YOUR_TOKEN_HERE' >> ~/.bash_profile
+     source ~/.bash_profile
+     ```
+
+2. Run the setup script:
+   ```bash
+   chmod +x setup
+   ./setup
+   ```
+
+The setup script will automatically create a virtual environment, install dependencies, and download the dataset to the training folder.
+
+### Manual Setup
+Alternatively, to manually download and set up the training data:
+- Download the CSV from https://www.kaggle.com/datasets/shanegerami/ai-vs-human-text?resource=download
+- Place the CSV in the location ./data/textual_cnn/training/ 
 
 ## Testing
 For ease of testing and simplicity, the trained model is currently tested against unprompted ChatGPT essays around 3000 characters:
