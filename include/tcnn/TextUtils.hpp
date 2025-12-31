@@ -2,8 +2,8 @@
 /// @par Text / character utilities
 ///
 
-#ifndef TCNN_TEXT_UTILS_H
-#define TCNN_TEXT_UTILS_H
+#ifndef TCNN_TEXT_UTILS_HPP
+#define TCNN_TEXT_UTILS_HPP
 
 #include <cstddef>
 #include <cstdint>
@@ -62,10 +62,13 @@ struct TextGridParams {
 ///
 /// @brief Converts a string of text into a grid of character IDs.
 /// @param params Parameters for the text grid conversion.
+/// @param outIds Output vector to store the resulting character IDs.
+/// @return A vector of character IDs representing the text grid.
 ///
 /// @todo Implement this function - place holder for now.
-auto to_grid_ids(const TextGridParams &params) noexcept -> void;
+[[nodiscard]] auto to_grid_ids(const TextGridParams &params) noexcept
+    -> std::vector<ImageId>;
 
 } // namespace tcnn
 
-#endif // TCNN_TEXT_UTILS_H
+#endif // TCNN_TEXT_UTILS_HPP

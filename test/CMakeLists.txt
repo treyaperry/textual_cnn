@@ -1,6 +1,8 @@
 
 # Add source files
 set(SOURCES
+    ErrorHandling_unittests.cpp
+    Macros_unittests.cpp
     TextUtils_unittests.cpp  
 )
 
