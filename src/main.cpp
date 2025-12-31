@@ -7,6 +7,8 @@
 /// @return Exit status code.
 ///
 auto main(const int argc, const char **argv) noexcept -> int {
+  static_cast<void>(argc);
+  static_cast<void>(argv);
   std::cout << "Hello, World!\n";
   return 0;
 }
